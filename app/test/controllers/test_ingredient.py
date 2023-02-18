@@ -1,4 +1,5 @@
 import pytest
+
 from app.controllers import IngredientController
 
 
@@ -38,11 +39,7 @@ def test_get_by_id(app, ingredient: dict):
 
 
 def test_get_all(app, ingredients: list):
-    created_ingredients = []
-    for ingredient in ingredients:
-        created_ingredient, _ = IngredientController.create(ingredient)
-        created_ingredients.append(created_ingredient)
-
+    created_ingredients = list(map(lambda ingredient: IngredientController.create(ingredient)[0], ingredients))
     ingredients_from_db, error = IngredientController.get_all()
     searchable_ingredients = {db_ingredient['_id']: db_ingredient for db_ingredient in ingredients_from_db}
     pytest.assume(error is None)
