@@ -1,5 +1,6 @@
 from sqlalchemy.exc import SQLAlchemyError
 
+from .base import BaseReceiver
 from ..common.utils import check_required_keys
 from ..repositories.managers import (
     BeverageManager,
@@ -7,10 +8,9 @@ from ..repositories.managers import (
     OrderManager,
     SizeManager
 )
-from .base import BaseController
 
 
-class OrderController(BaseController):
+class OrderReceiver(BaseReceiver):
     manager = OrderManager
     __required_info = ('client_name', 'client_dni', 'client_address', 'client_phone', 'size_id')
 

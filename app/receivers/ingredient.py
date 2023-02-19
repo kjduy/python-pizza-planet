@@ -1,6 +1,6 @@
+from .base import BaseReceiver
 from ..repositories.managers import IngredientManager
-from .base import BaseController
 
 
-class IngredientController(BaseController):
+class IngredientReceiver(BaseReceiver):
     manager = IngredientManager

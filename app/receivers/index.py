@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from ..repositories.managers import IndexManager
 
 
-class IndexController:
+class IndexReceiver:
 
     @staticmethod
     def test_connection() -> Tuple[bool, str]:
