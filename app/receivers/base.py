@@ -3,20 +3,20 @@ from sqlalchemy.exc import SQLAlchemyError
 from ..repositories.managers import BaseManager
 
 
-class BaseController:
+class BaseReceiver:
     manager: Optional[BaseManager] = None
-
-    @classmethod
-    def get_by_id(cls, _id: Any) -> Tuple[Any, Optional[str]]:
-        try:
-            return cls.manager.get_by_id(_id), None
-        except (SQLAlchemyError, RuntimeError) as ex:
-            return None, str(ex)
 
     @classmethod
     def get_all(cls) -> Tuple[Any, Optional[str]]:
         try:
             return cls.manager.get_all(), None
+        except (SQLAlchemyError, RuntimeError) as ex:
+            return None, str(ex)
+
+    @classmethod
+    def get_by_id(cls, _id: Any) -> Tuple[Any, Optional[str]]:
+        try:
+            return cls.manager.get_by_id(_id), None
         except (SQLAlchemyError, RuntimeError) as ex:
             return None, str(ex)
 

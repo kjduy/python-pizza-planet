@@ -1,6 +1,6 @@
+from .base import BaseReceiver
 from ..repositories.managers import SizeManager
-from .base import BaseController
 
 
-class SizeController(BaseController):
+class SizeReceiver(BaseReceiver):
     manager = SizeManager
