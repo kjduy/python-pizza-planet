@@ -21,7 +21,7 @@ jobs:
 
       - name: Run tests and coverage
         run: |
-          pytest --cov=./app/test --cov-fail-under=80 --cov-report=term-missing > pytest-coverage-results.txt
+          pytest --cov=./ --cov-fail-under=80 --cov-report=term-missing > pytest-coverage-results.txt
 
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
