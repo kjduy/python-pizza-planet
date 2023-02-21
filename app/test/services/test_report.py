@@ -8,6 +8,6 @@ def test_get_report_service__returns_status_200__with_orders(client, create_orde
     pytest.assume(response.status.startswith('200'))
     response_json = response.json
     pytest.assume(response_json['most_requested_ingredient']['name'])
-    pytest.assume(response_json['most_requested_ingredient']['count'])
+    pytest.assume(response_json['most_requested_ingredient']['num_requested'])
     pytest.assume(response_json['month_with_more_revenue']['month'])
     pytest.assume(response_json['best_customers']['customers'])
