@@ -1,5 +1,4 @@
 from datetime import datetime
-from itertools import product
 from typing import Any, List, Optional, Sequence
 
 from sqlalchemy.sql import text, column
@@ -80,15 +79,18 @@ class OrderManager(BaseManager):
         cls.session.flush()
         cls.session.refresh(new_order)
         cls.session.add_all(
-            map(
-                lambda pair: OrderDetail(
-                    order_id=new_order._id,
-                    beverage_id=pair[0]._id,
-                    beverage_price=pair[0].price,
-                    ingredient_id=pair[1]._id,
-                    ingredient_price=pair[1].price
-                ),
-                product(beverages, ingredients)
+            list(
+                map(
+                    lambda beverage, ingredient: OrderDetail(
+                        order_id=new_order._id,
+                        beverage_id=beverage._id,
+                        beverage_price=beverage.price,
+                        ingredient_id=ingredient._id,
+                        ingredient_price=ingredient.price
+                    ),
+                    beverages,
+                    ingredients
+                )
             )
         )
         cls.session.commit()
@@ -134,7 +136,7 @@ class ReportManager(BaseManager):
 
         month_name = datetime.strptime(month_with_more_revenue.month, '%m').strftime('%B')
 
-        return {'month': month_name, 'revenue': month_with_more_revenue.revenue}
+        return {'month': month_name, 'revenue': round(month_with_more_revenue.revenue, 2)}
 
     @classmethod
     def get_best_customers(cls):
@@ -145,7 +147,6 @@ class ReportManager(BaseManager):
             Order.client_phone,
             db.func.count(Order._id).label('num_orders')
         ) \
-        .join(OrderDetail) \
         .group_by(Order.client_name, Order.client_dni, Order.client_address, Order.client_phone) \
         .order_by(text('num_orders DESC')) \
         .limit(3) \
