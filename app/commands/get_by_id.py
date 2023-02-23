@@ -1,9 +1,9 @@
-from .command import Command
+from .base import BaseCommand
 
 
-class GetByIdCommand(Command):
+class GetByIdCommand(BaseCommand):
     def __init__(self, receiver, _id: int):
-        self.receiver = receiver
+        super().__init__(receiver)
         self._id = _id
 
     def execute(self):
