@@ -19,6 +19,12 @@ seeder = FlaskSeeder()
 seeder.init_app(flask_app, db)
 
 
+@manager.command('delete_db', with_appcontext=False)
+def populate_db():
+    subprocess.run('python manage.py db downgrade', shell=True)
+    subprocess.run('python manage.py db upgrade', shell=True)
+
+
 @manager.command('populate_db', with_appcontext=False)
 def populate_db():
     subprocess.run('python ./manage.py seed run --root app/seed', shell=True)
