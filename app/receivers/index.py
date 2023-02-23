@@ -1,7 +1,7 @@
-from typing import Tuple
 from sqlalchemy.exc import SQLAlchemyError
+from typing import Tuple
 
-from ..repositories.managers import IndexManager
+from ..repositories.managers.index import IndexManager
 
 
 class IndexReceiver:
