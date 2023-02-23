@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from ..repositories.managers.report import ReportManager
 
 
-class ReportReceiver():
+class ReportReceiver:
     manager = ReportManager
 
     @classmethod

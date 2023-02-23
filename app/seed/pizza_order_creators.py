@@ -1,4 +1,4 @@
-from app.repositories.models import OrderDetail, Order
+from app.repositories.models import Order, OrderDetail
 from app.seed.client_faker import ClientFaker
 
 
@@ -7,9 +7,9 @@ def create_pizza_items(model, faker, constant):
         map(
             lambda item: model(
                 name=item,
-                price=faker.pyfloat(right_digits=2, positive=True, max_value=10)
+                price=faker.pyfloat(right_digits=2, positive=True, max_value=10),
             ),
-            constant
+            constant,
         )
     )
     return items
@@ -20,15 +20,14 @@ def create_clients(faker):
         map(
             lambda _: ClientFaker(
                 name=faker.name(),
-                dni=faker.random_int(min=10**9, max=(10**10)-1),
+                dni=faker.random_int(min=10**9, max=(10**10) - 1),
                 address=faker.address(),
-                phone=faker.numerify('09########')
+                phone=faker.numerify("09########"),
             ),
-            range(10)
+            range(10),
         )
     )
     return clients
-
 
 
 def create_order(order_id, clients, ingredients, beverages, sizes, faker):
@@ -37,7 +36,7 @@ def create_order(order_id, clients, ingredients, beverages, sizes, faker):
     client_dni = client.dni
     client_address = client.address
     client_phone = client.phone
-    date = faker.date_between(start_date='-1y', end_date='today')
+    date = faker.date_between(start_date="-1y", end_date="today")
 
     ingredient = faker.random_element(elements=ingredients)
     ingredient_price = ingredient.price
@@ -56,7 +55,7 @@ def create_order(order_id, clients, ingredients, beverages, sizes, faker):
         beverage_price=beverage_price,
         ingredient=ingredient,
         beverage=beverage,
-        order_id=order_id+1
+        order_id=order_id + 1,
     )
     order_details.append(order_detail)
 
@@ -68,7 +67,7 @@ def create_order(order_id, clients, ingredients, beverages, sizes, faker):
         date=date,
         total_price=total_price,
         size=size,
-        detail=order_details
+        detail=order_details,
     )
-    
+
     return orders

@@ -1,8 +1,8 @@
 from typing import List
 
-from .base import BaseManager
 from ..models import Beverage, Ingredient, Order, OrderDetail
 from ..serializers.order import OrderSerializer
+from .base import BaseManager
 
 
 class OrderManager(BaseManager):
@@ -10,7 +10,9 @@ class OrderManager(BaseManager):
     serializer = OrderSerializer
 
     @classmethod
-    def create(cls, order_data: dict, beverages: List[Beverage], ingredients: List[Ingredient]):
+    def create(
+        cls, order_data: dict, beverages: List[Beverage], ingredients: List[Ingredient]
+    ):
         new_order = cls.model(**order_data)
         cls.session.add(new_order)
         cls.session.flush()
@@ -23,10 +25,10 @@ class OrderManager(BaseManager):
                         beverage_id=beverage._id,
                         beverage_price=beverage.price,
                         ingredient_id=ingredient._id,
-                        ingredient_price=ingredient.price
+                        ingredient_price=ingredient.price,
                     ),
                     beverages,
-                    ingredients
+                    ingredients,
                 )
             )
         )
@@ -35,4 +37,4 @@ class OrderManager(BaseManager):
 
     @classmethod
     def update(cls):
-        raise NotImplementedError(f'Method not suported for {cls.__name__}')
+        raise NotImplementedError(f"Method not suported for {cls.__name__}")

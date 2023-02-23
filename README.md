@@ -124,3 +124,15 @@ ext install ritwickdey.LiveServer
 ```bash
 python3 manage.py test
 ```
+
+- Run code formatter command
+
+```bash
+python3 -m black ./
+```
+
+- Run sort library command
+
+```bash
+isort ./
+```

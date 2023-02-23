@@ -6,4 +6,4 @@ class BaseCommand(Command):
         self.receiver = receiver
 
     def execute(self):
-        raise NotImplementedError('The execute function must be implemented')
+        raise NotImplementedError("The execute function must be implemented")

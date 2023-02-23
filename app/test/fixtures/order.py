@@ -1,35 +1,35 @@
 import pytest
 
-from ..utils.functions import (
-    shuffle_list, get_random_sequence,
-    get_random_string
-)
+from ..utils.functions import (get_random_sequence, get_random_string,
+                               shuffle_list)
 
 
 def client_data_mock() -> dict:
     return {
-        'client_address': get_random_string(),
-        'client_dni': get_random_sequence(),
-        'client_name': get_random_string(),
-        'client_phone': get_random_sequence()
+        "client_address": get_random_string(),
+        "client_dni": get_random_sequence(),
+        "client_name": get_random_string(),
+        "client_phone": get_random_sequence(),
     }
 
 
 def order_mock(create_beverages, create_ingredients, create_sizes) -> dict:
-    beverages = list(map(lambda beverage: beverage.get('_id'), create_beverages))
-    ingredients = list(map(lambda ingredient: ingredient.get('_id'), create_ingredients))
-    sizes = list(map(lambda size: size.get('_id'), create_sizes))
+    beverages = list(map(lambda beverage: beverage.get("_id"), create_beverages))
+    ingredients = list(
+        map(lambda ingredient: ingredient.get("_id"), create_ingredients)
+    )
+    sizes = list(map(lambda size: size.get("_id"), create_sizes))
     return {
         **client_data_mock(),
-        'beverages': shuffle_list(beverages)[:5],
-        'ingredients': shuffle_list(ingredients)[:5],
-        'size_id': shuffle_list(sizes)[0]
+        "beverages": shuffle_list(beverages)[:5],
+        "ingredients": shuffle_list(ingredients)[:5],
+        "size_id": shuffle_list(sizes)[0],
     }
 
 
 @pytest.fixture
 def order_uri():
-    return '/order/'
+    return "/order/"
 
 
 @pytest.fixture
