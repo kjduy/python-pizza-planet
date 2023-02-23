@@ -1,5 +1,5 @@
 from .base import BaseReceiver
-from ..repositories.managers import SizeManager
+from ..repositories.managers.size import SizeManager
 
 
 class SizeReceiver(BaseReceiver):

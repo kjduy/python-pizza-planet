@@ -1,6 +1,7 @@
-from typing import Any, Optional, Tuple
 from sqlalchemy.exc import SQLAlchemyError
-from ..repositories.managers import BaseManager
+from typing import Any, Optional, Tuple
+
+from ..repositories.managers.base import BaseManager
 
 
 class BaseReceiver:

@@ -1,5 +1,5 @@
 from .base import BaseReceiver
-from ..repositories.managers import BeverageManager
+from ..repositories.managers.beverage import BeverageManager
 
 
 class BeverageReceiver(BaseReceiver):
