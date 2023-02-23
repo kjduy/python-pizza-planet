@@ -63,6 +63,18 @@ python3 manage.py db migrate
 python3 manage.py db upgrade
 ```
 
+- Populate db with fake data
+
+```bash
+python3 manage.py populate_db
+```
+
+- Delete fake data
+
+```bash
+python3 manage.py delete_db
+```
+
 - If you want to use the hot reload feature set FLASK_ENV before running the project:
 
 _For linux/MacOS users:_
