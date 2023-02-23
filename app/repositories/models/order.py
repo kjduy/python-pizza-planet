@@ -11,7 +11,7 @@ class Order(db.Model):
     client_phone = db.Column(db.String(15))
     date = db.Column(db.DateTime, default=datetime.utcnow)
     total_price = db.Column(db.Float)
-    size_id = db.Column(db.Integer, db.ForeignKey('size._id'))
+    size_id = db.Column(db.Integer, db.ForeignKey("size._id"))
 
-    size = db.relationship('Size', backref=db.backref('size'))
-    detail = db.relationship('OrderDetail', backref=db.backref('order_detail'))
+    size = db.relationship("Size", backref=db.backref("size"))
+    detail = db.relationship("OrderDetail", backref=db.backref("order_detail"))

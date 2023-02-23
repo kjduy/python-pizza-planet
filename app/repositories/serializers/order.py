@@ -1,7 +1,8 @@
 from app.plugins import ma
+
 from ..models import Order
-from .size import SizeSerializer
 from .order_detail import OrderDetailSerializer
+from .size import SizeSerializer
 
 
 class OrderSerializer(ma.SQLAlchemyAutoSchema):
@@ -12,13 +13,13 @@ class OrderSerializer(ma.SQLAlchemyAutoSchema):
         model = Order
         load_instance = True
         fields = (
-            '_id',
-            'client_name',
-            'client_dni',
-            'client_address',
-            'client_phone',
-            'date',
-            'total_price',
-            'size',
-            'detail'
+            "_id",
+            "client_name",
+            "client_dni",
+            "client_address",
+            "client_phone",
+            "date",
+            "total_price",
+            "size",
+            "detail",
         )

@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+
 from faker import Faker
 from flask_seeder import Seeder
 
@@ -23,7 +24,14 @@ class OrderSeeder(Seeder):
 
         clients = create_clients(faker)
 
-        order = list(map(lambda order_id: create_order(order_id, clients, ingredients, beverages, sizes, faker), range(100)))
+        order = list(
+            map(
+                lambda order_id: create_order(
+                    order_id, clients, ingredients, beverages, sizes, faker
+                ),
+                range(100),
+            )
+        )
         db.session.add_all(order)
 
         db.session.commit()
