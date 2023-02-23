@@ -1,9 +1,9 @@
-from .command import Command
+from .base import BaseCommand
 
 
-class UpdateCommand(Command):
+class UpdateCommand(BaseCommand):
     def __init__(self, receiver, request):
-        self.receiver = receiver
+        super().__init__(receiver)
         self.request = request
 
     def execute(self):

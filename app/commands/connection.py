@@ -1,9 +1,6 @@
-from .command import Command
+from .base import BaseCommand
 
 
-class TestConnectionCommand(Command):
-    def __init__(self, receiver):
-        self.receiver = receiver
-
+class TestConnectionCommand(BaseCommand):
     def execute(self):
         return self.receiver.test_connection()

@@ -1,9 +1,6 @@
-from .command import Command
+from .base import BaseCommand
 
 
-class GetAllCommand(Command):
-    def __init__(self, receiver):
-        self.receiver = receiver
-
+class GetAllCommand(BaseCommand):
     def execute(self):
         return self.receiver.get_all()
