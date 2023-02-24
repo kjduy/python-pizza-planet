@@ -1,10 +1,13 @@
 import pytest
 
-from app.commands import (CreateCommand, GetAllCommand, GetByIdCommand,
-                          UpdateCommand)
+from app.commands import CreateCommand, GetAllCommand, GetByIdCommand, UpdateCommand
 from app.invoker import Invoker
-from app.receivers import (BeverageReceiver, IngredientReceiver, OrderReceiver,
-                           SizeReceiver)
+from app.receivers import (
+    BeverageReceiver,
+    IngredientReceiver,
+    OrderReceiver,
+    SizeReceiver,
+)
 from app.receivers.base import BaseReceiver
 from app.test.utils.functions import get_random_choice, shuffle_list
 

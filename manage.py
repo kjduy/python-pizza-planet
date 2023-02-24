@@ -7,8 +7,7 @@ from flask_seeder import FlaskSeeder
 
 from app import flask_app
 from app.plugins import db
-from app.repositories.models import (Beverage, Ingredient, Order, OrderDetail,
-                                     Size)
+from app.repositories.models import Beverage, Ingredient, Order, OrderDetail, Size
 
 manager = FlaskGroup(flask_app)
 

@@ -1,7 +1,6 @@
 import pytest
 
-from app.commands import (CreateCommand, GetAllCommand, GetByIdCommand,
-                          UpdateCommand)
+from app.commands import CreateCommand, GetAllCommand, GetByIdCommand, UpdateCommand
 from app.invoker import Invoker
 from app.receivers import IngredientReceiver
 
