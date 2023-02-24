@@ -1,7 +1,6 @@
 from flask import Blueprint, request
 
-from ..commands import (CreateCommand, GetAllCommand, GetByIdCommand,
-                        UpdateCommand)
+from ..commands import CreateCommand, GetAllCommand, GetByIdCommand, UpdateCommand
 from ..common.http_methods import GET, POST, PUT
 from ..receivers import BeverageReceiver
 from .base import execute_command

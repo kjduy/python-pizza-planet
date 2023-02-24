@@ -30,34 +30,46 @@ def create_clients(faker):
     return clients
 
 
+def generate_random_set(elements, num_details, faker):
+    return set(
+        map(lambda _: faker.random_element(elements=elements), range(num_details))
+    )
+
+
 def create_order(order_id, clients, ingredients, beverages, sizes, faker):
     client = faker.random_element(elements=clients)
     client_name = client.name
     client_dni = client.dni
     client_address = client.address
     client_phone = client.phone
-    date = faker.date_between(start_date="-1y", end_date="today")
+    date = faker.date_time_between(start_date="-1y", end_date="now")
 
-    ingredient = faker.random_element(elements=ingredients)
-    ingredient_price = ingredient.price
-
-    beverage = faker.random_element(elements=beverages)
-    beverage_price = beverage.price
-
-    size = faker.random_element(elements=sizes)
-    size_price = size.price
-
-    total_price = round(beverage_price + ingredient_price + size_price, 2)
+    num_details = faker.random_int(min=1, max=5)
+    ingredient_set = generate_random_set(ingredients, num_details, faker)
+    beverage_set = generate_random_set(beverages, num_details, faker)
 
     order_details = []
-    order_detail = OrderDetail(
-        ingredient_price=ingredient_price,
-        beverage_price=beverage_price,
-        ingredient=ingredient,
-        beverage=beverage,
-        order_id=order_id + 1,
+    order_details = list(
+        map(
+            lambda ingredient, beverage: OrderDetail(
+                ingredient_price=ingredient.price,
+                beverage_price=beverage.price,
+                ingredient=ingredient,
+                beverage=beverage,
+                order_id=order_id + 1,
+            ),
+            ingredient_set,
+            beverage_set,
+        )
     )
-    order_details.append(order_detail)
+
+    total_price = sum(
+        detail.beverage_price + detail.ingredient_price for detail in order_details
+    )
+    size = faker.random_element(elements=sizes)
+    size_price = size.price
+    total_price += size_price
+    round_total_price = round(total_price, 2)
 
     orders = Order(
         client_name=client_name,
@@ -65,7 +77,7 @@ def create_order(order_id, clients, ingredients, beverages, sizes, faker):
         client_address=client_address,
         client_phone=client_phone,
         date=date,
-        total_price=total_price,
+        total_price=round_total_price,
         size=size,
         detail=order_details,
     )
